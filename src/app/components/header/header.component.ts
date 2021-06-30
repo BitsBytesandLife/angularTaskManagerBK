@@ -12,10 +12,11 @@ export class HeaderComponent implements OnInit {
   title: string = 'Task Manager';
   showAddTask: boolean = false;
   subscription: Subscription;
-  constructor(private uiService: UiService) { 
+  
+  constructor(private uiService: UiService, private router: Router) {
     this.subscription = this.uiService
-    .onToggle()
-    .subscribe((value) => (this.showAddTask = value));
+      .onToggle()
+      .subscribe((value) => (this.showAddTask = value));
   }
 
   ngOnInit(): void {
@@ -24,6 +25,10 @@ export class HeaderComponent implements OnInit {
   toggleAddTask() {
     this.uiService.toggleAddTask();
     //console.log('toggle');
+  }
+
+  hasRoute(route: string) {
+    return this.router.url === route;
   }
 
 }
